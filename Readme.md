@@ -9,7 +9,7 @@ This repo serves as a minimally viable example of how to combine the great ideas
 - React (via [Preact](https://github.com/developit/preact))
 - Redux (via [Socrates](https://github.com/matthewmueller/socrates))
 - Action Logging (via [Redux Logger](https://github.com/fcomb/redux-logger))
-- Functional Routing (via [enroute](https://github.com/lapwinglabs/enroute) + simple history middleware)
+- Functional Routing (via [enroute](https://github.com/lapwinglabs/enroute) + [simple history middleware](https://github.com/matthewmueller/redux-routes))
 
 ## See for yourself
 

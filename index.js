@@ -3,10 +3,11 @@
  */
 
 import { render, h } from 'preact-socrates'
+import History from 'redux-routes'
 import Logger from 'redux-logger'
 import Socrates from 'socrates'
-import History from 'history'
 import Route from 'enroute'
+let { navigate } = History
 
 /**
  * Initialize Socrates
@@ -17,7 +18,7 @@ import Route from 'enroute'
  * building an app
  */
 
-var store = Socrates([
+let store = Socrates([
   Logger(),
   History()
 ])
@@ -40,7 +41,7 @@ const App = (props) => (
 const Home = ({ dispatch, greeting }) => (
   <div class='home'>
     <h2>{greeting}</h2>
-    <button onClick={(e) => dispatch('navigate', { url: '/blog' })}>Go to the blog</button>
+    <button onClick={(e) => dispatch(navigate('/blog'))}>Go to the blog</button>
   </div>
 )
 
@@ -51,7 +52,7 @@ const Home = ({ dispatch, greeting }) => (
 const Blog = ({ dispatch }) => (
   <div class='blog'>
     <h2>Welcome to the Blog!</h2>
-    <button onClick={(e) => dispatch('navigate', { url: '/' })}>Go back to Home</button>
+    <button onClick={(e) => dispatch(navigate('/'))}>Go back to Home</button>
   </div>
 )
 
