@@ -13,6 +13,7 @@ This repo serves as a minimally viable example of how to combine the great ideas
 ## See for yourself
 
 ```
+git clone https://github.com/matthewmueller/28kb-react-redux-routing
 npm install
 npm start
 ```
