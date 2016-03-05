@@ -1,8 +1,16 @@
-# 28kb React + Redux + Routing Stack
+# React + Redux + Routing Stack for 28kb
 
 Just because your stack is awesome, doesn't mean it has to be fat.
 
 This repo serves as a minimally viable example of how to combine the great ideas of React + Redux without compromising on your build size.
+
+## Kilobytes as currency
+
+My goal for this project is to treat kilobytes as a sort of currency.
+
+> I'll give you React, Redux and a Routing Stack for just 28kb. What can you offer me?
+
+Heavy frameworks aren't just slow for end users to download, they slow down our transpilers, they are harder to understand internally when the framework inevitably breaks, and they're typically more difficult to extend and make your own.
 
 ## Behind the Curtain
 
