@@ -10,7 +10,7 @@ My goal for this project is to treat kilobytes as a sort of currency.
 
 > I'll give you React, Redux and a Routing Stack for just 28kb. What can you offer me?
 
-Heavy frameworks aren't just slow for end users to download, they slow down our transpilers, they are harder to understand internally when the framework inevitably breaks, and they're typically more difficult to extend and make your own.
+Heavy frameworks aren't just slow for end users to download, they slow down our transpilers, they are harder to understand internally when the framework inevitably breaks, and they're typically more difficult to extend and make our own.
 
 ## Behind the Curtain
 
