@@ -18,3 +18,7 @@ git clone https://github.com/matthewmueller/28kb-react-redux-routing
 npm install
 npm start
 ```
+
+## Kudos
+
+All the hard work here was done by [@developit](https://github.com/developit) for his work on [Preact](https://github.com/developit/preact) and [@gearon](https://github.com/gaearon) for his work on [redux](https://github.com/reactjs/redux). The "custom" modules you see above are just a small amount of UX grease on top of the great implementations.
