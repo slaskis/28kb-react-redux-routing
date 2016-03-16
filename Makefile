@@ -1,11 +1,14 @@
 development: install
-	@NODE_PATH=lib PORT=5000 ./node_modules/.bin/scooby index.js --open
+	@NODE_PATH=lib PORT=5000 ./node_modules/.bin/scooby client.js --open
 
 install:
 	@npm install
 
-build:
-	@NODE_PATH=lib ./node_modules/.bin/scooby index.js
+build: build/client.js
+	@:
+
+build/client.js: index.js client.js
+	@NODE_PATH=lib ./node_modules/.bin/scooby client.js
 
 minify: build/index.js
 	@curl -s \
