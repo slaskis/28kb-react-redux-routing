@@ -3,7 +3,7 @@
  */
 
 import { render } from 'preact-render-to-string'
-import { h } from 'preact'
+import { h } from 'preact-socrates'
 import Logger from 'redux-logger'
 import Socrates from 'socrates'
 import Koa from 'koa'
