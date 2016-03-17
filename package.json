@@ -13,7 +13,7 @@
     "mako-stat": "^0.8.0",
     "mako-text": "^0.8.0",
     "preact-render-to-string": "^2.1.0",
-    "preact-socrates": "^1.0.0",
+    "preact-socrates": "slaskis/preact-socrates#isomorphic",
     "redux-logger": "^2.6.1",
     "redux-routes": "^1.0.0",
     "socrates": "^1.0.1",
