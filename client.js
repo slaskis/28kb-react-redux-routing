@@ -7,6 +7,7 @@ import History from 'redux-routes'
 import Logger from 'redux-logger'
 import Socrates from 'socrates'
 import {App} from './'
+import {reducer} from './reducer'
 
 /**
  * Initialize Socrates
@@ -20,7 +21,7 @@ import {App} from './'
 let store = Socrates([
   Logger(),
   History()
-])
+], reducer)
 
 /**
  * Initialize the store

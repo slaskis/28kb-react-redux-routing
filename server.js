@@ -9,7 +9,8 @@ import Socrates from 'socrates'
 import Koa from 'koa'
 import serve from 'koa-static'
 import convert from 'koa-convert'
-import {App} from './'
+import { App } from './'
+import {reducer} from './reducer'
 
 
 const app = new Koa()
@@ -26,7 +27,7 @@ app.use(async ctx => {
    */
   let store = Socrates([
     Logger()
-  ])
+  ], reducer)
 
   /**
    * Initialize the store
@@ -34,24 +35,42 @@ app.use(async ctx => {
 
   const initialState = {
     url: ctx.path,
-    greeting: 'Welcome to the website, friend!'
+    greeting: 'Welcome to the website, friend!',
+    articles: []
   }
 
-  store('boot', initialState)
+  await store('boot', initialState)
+  await store(async state => {
+    console.log(state)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return {
+      type: 'add articles',
+      payload: [
+        {
+          id: '1',
+          title: 'Foo',
+          summary: 'Bar',
+          body: 'More bar'
+        }
+      ]
+    }
+  })
 
   /**
    * Render
    */
-  const html = render(h(App, store()));
+  const html = render(h(App, store()))
 
-  ctx.body = `<!DOCTYPE html>
-    <html>
-      <body>
-        <div id='app'>${html}</div>
-        <script>var INITIAL_STATE = ${JSON.stringify(store())}</script>
-        <script src='/build/client.js'></script>
-      </body>
-    </html>`;
+  ctx.body = `
+  <!DOCTYPE html>
+  <html>
+    <body>
+      <div id='app'>${html}</div>
+      <script>var INITIAL_STATE = ${JSON.stringify(store())}</script>
+      <script src='/build/client.js'></script>
+    </body>
+  </html>
+  `
 })
 
 app.listen(8001)

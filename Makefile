@@ -1,3 +1,5 @@
+.PHONY: build
+
 development: install
 	@NODE_PATH=lib PORT=5000 ./node_modules/.bin/scooby client.js --open
 
@@ -7,7 +9,7 @@ install:
 build: build/client.js
 	@:
 
-build/client.js: index.js client.js
+build/client.js: *.js
 	@NODE_PATH=lib ./node_modules/.bin/scooby client.js
 
 minify: build/index.js

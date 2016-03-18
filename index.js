@@ -20,6 +20,7 @@ export class App extends Component {
   render() {
     return Route({
       '/blog': (params) => <Blog {...params} {...this.props} />,
+      '/blog/:id': (params) => <Article {...params} {...this.props} />,
       '*': (params) => <Home {...params} {...this.props} />
     })(this.props.url)
   }
@@ -29,7 +30,7 @@ export class App extends Component {
  * Home
  */
 
-export const Home = ({ greeting }) => (
+const Home = ({ greeting }) => (
   <div class='home'>
     <h2>{greeting}</h2>
     <Link to='/blog'>Go to the blog</Link>
@@ -40,11 +41,27 @@ export const Home = ({ greeting }) => (
  * Blog
  */
 
-export const Blog = () => (
+const Blog = ({ articles }) => (
   <div class='blog'>
     <h2>Welcome to the Blog!</h2>
     <Link to='/' style={{color: 'orange'}}>Go back to Home</Link>
+    {articles.map(article => <ShortArticle {...article} />)}
   </div>
+)
+
+const Article = ({id, title, body}) => (
+  <article id={`article-${id}`}>
+    <h1>{title}</h1>
+    <div>{body}</div>
+  </article>
+)
+
+const ShortArticle = ({id, title, summary}) => (
+  <article id={`short-article-${id}`}>
+    <h1>{title}</h1>
+    <div>{summary}</div>
+    <Link to={`/blog/${id}`}>Read more</Link>
+  </article>
 )
 
 const Link = ({to, children, ...props}, {dispatch}) => (
