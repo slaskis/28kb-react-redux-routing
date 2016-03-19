@@ -1,18 +1,15 @@
 .PHONY: build
 
-development: install
-	@NODE_PATH=lib PORT=5000 ./node_modules/.bin/scooby client.js --open
-
 install:
 	@npm install
 
 build: build/client.js
 	@:
 
-build/client.js: *.js
-	@NODE_PATH=lib ./node_modules/.bin/scooby client.js
+build/client.js: app/*.js
+	npm run build-client
 
-minify: build/index.js
+minify: build/client.js
 	@curl -s \
 		-d compilation_level=SIMPLE_OPTIMIZATIONS \
 		-d output_format=text \
@@ -20,7 +17,7 @@ minify: build/index.js
 		--data-urlencode "js_code@$<" \
 		http://closure-compiler.appspot.com/compile \
 		> $<.tmp
-	@mv $<.tmp build/index.min.js
-	@gzip -c build/index.min.js > build/index.min.js.gz
+	@mv $<.tmp build/client.min.js
+	@gzip -c build/client.min.js > build/client.min.js.gz
 
 dist: install build minify
