@@ -5,7 +5,13 @@ import { Component } from 'preact'
 import { h } from 'preact-socrates'
 import { navigate } from 'redux-routes'
 import Route from 'enroute'
+import { StyleSheet, css } from 'aphrodite'
 
+const styles = StyleSheet.create({
+  red: {
+    backgroundColor: 'green'
+  }
+})
 
 /**
  * App
@@ -20,7 +26,7 @@ export class App extends Component {
   render() {
     return Route({
       '/blog': (params) => <Blog {...params} {...this.props} />,
-      '/blog/:id': (params) => <Article {...params} {...this.props} />,
+      //'/blog/:id': (params) => <Article {...params} {...this.props} />,
       '*': (params) => <Home {...params} {...this.props} />
     })(this.props.url)
   }
@@ -31,7 +37,7 @@ export class App extends Component {
  */
 
 const Home = ({ greeting }) => (
-  <div class='home'>
+  <div class='home' class={css(styles.red)}>
     <h2>{greeting}</h2>
     <Link to='/blog'>Go to the blog</Link>
   </div>

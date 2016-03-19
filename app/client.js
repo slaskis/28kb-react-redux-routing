@@ -3,6 +3,7 @@
  */
 
 import { h, render } from 'preact-socrates'
+import { StyleSheet } from 'aphrodite'
 import History from 'redux-routes'
 import Logger from 'redux-logger'
 import Socrates from 'socrates'
@@ -30,9 +31,15 @@ let store = Socrates([
 store('boot', window.INITIAL_STATE)
 
 /**
+ * Initialize the styles
+ */
+
+StyleSheet.rehydrate(window.RENDERED_CLASS_NAMES);
+
+/**
  * Render
  */
 
 const root = document.getElementById('app')
-root.innerHTML = ''
 render(App, store, root)
+root.removeChild(root.firstChild);

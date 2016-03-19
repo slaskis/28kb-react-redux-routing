@@ -4,6 +4,7 @@
 
 import { render } from 'preact-render-to-string'
 import { h } from 'preact-socrates'
+import { StyleSheetServer } from 'aphrodite';
 import Logger from 'redux-logger'
 import Socrates from 'socrates'
 import Koa from 'koa'
@@ -25,9 +26,7 @@ app.use(async ctx => {
    * want to use your own reducer if you're actually
    * building an app
    */
-  let store = Socrates([
-    Logger()
-  ], reducer)
+  let store = Socrates(reducer)
 
   /**
    * Initialize the store
@@ -59,14 +58,20 @@ app.use(async ctx => {
   /**
    * Render
    */
-  const html = render(h(App, store()))
+  const {html, css} = StyleSheetServer.renderStatic(() => render(h(App, store())))
 
   ctx.body = `
   <!DOCTYPE html>
   <html>
+    <head>
+      <style data-aphrodite>${css.content}</style>
+    </head>
     <body>
       <div id='app'>${html}</div>
-      <script>var INITIAL_STATE = ${JSON.stringify(store())}</script>
+      <script>
+        var INITIAL_STATE = ${JSON.stringify(store())};
+        var RENDERED_CLASS_NAMES = ${JSON.stringify(css.renderedClassNames)};
+      </script>
       <script src='/build/client.js'></script>
     </body>
   </html>
