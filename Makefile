@@ -1,4 +1,4 @@
-.PHONY: build minify dist
+.PHONY: install build minify dist
 
 install:
 	@npm install
