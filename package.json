@@ -10,8 +10,10 @@
     "koa-static": "^2.0.0",
     "preact-render-to-string": "^2.1.0",
     "preact-socrates": "matthewmueller/preact-socrates#1.0.1",
+    "redux": "^3.3.1",
     "redux-logger": "^2.6.1",
     "redux-routes": "^1.0.0",
+    "reselect": "^2.2.1",
     "socrates": "^1.0.1"
   },
   "babel": {

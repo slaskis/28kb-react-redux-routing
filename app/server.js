@@ -11,12 +11,16 @@ import Koa from 'koa'
 import serve from 'koa-static'
 import convert from 'koa-convert'
 import { App } from './'
-import {reducer} from './reducer'
+import { reducer } from './reducers'
 
 
 const app = new Koa()
 app.use(convert(serve('.')))
 app.use(async ctx => {
+
+  if (ctx.path == '/favicon.ico') {
+    return
+  }
 
   /**
    * Initialize Socrates
@@ -26,7 +30,9 @@ app.use(async ctx => {
    * want to use your own reducer if you're actually
    * building an app
    */
-  let store = Socrates(reducer)
+  let store = Socrates([
+    Logger(),
+  ], reducer)
 
   /**
    * Initialize the store
@@ -35,30 +41,28 @@ app.use(async ctx => {
   const initialState = {
     url: ctx.path,
     greeting: 'Welcome to the website, friend!',
-    articles: []
+    blog: {
+      articles: []
+    }
   }
 
   await store('boot', initialState)
-  await store(async state => {
-    console.log(state)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    return {
-      type: 'add articles',
-      payload: [
-        {
-          id: '1',
-          title: 'Foo',
-          summary: 'Bar',
-          body: 'More bar'
-        }
-      ]
-    }
-  })
+  await store(state => ({
+    type: 'add blog.articles',
+    payload: [
+      {
+        id: '1',
+        title: 'Foo',
+        summary: 'Bar',
+        body: 'More bar'
+      }
+    ]
+  }))
 
   /**
    * Render
    */
-  const {html, css} = StyleSheetServer.renderStatic(() => render(h(App, store())))
+  const {html, css} = StyleSheetServer.renderStatic(() => render(h(App, {...store(), dispatch: store})))
 
   ctx.body = `
   <!DOCTYPE html>
