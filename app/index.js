@@ -20,9 +20,10 @@ export class App extends Component {
 
   render(props) {
     return Route({
+      '/': params => <Home {...params} {...props} />,
       '/blog': params => <Blog {...params} {...props} />,
       '/blog/:id': params => <Article {...params} {...props} />,
-      '*': params => <Home {...params} {...props} />
+      '*': params => <Home {...params} {...props} notFound />
     })(global.location ? global.location.pathname : props.url)
   }
 
