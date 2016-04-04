@@ -9,7 +9,10 @@ build: build/client.js
 build/client.js: app/*.js
 	npm run build-client
 
-minify: build/client.js
+minify: build/client.min.js.gz
+	@:
+
+build/%.min.js: build/%.js
 	@curl -s \
 		-d compilation_level=SIMPLE_OPTIMIZATIONS \
 		-d output_format=text \
@@ -17,7 +20,10 @@ minify: build/client.js
 		--data-urlencode "js_code@$<" \
 		http://closure-compiler.appspot.com/compile \
 		> $<.tmp
-	@mv $<.tmp build/client.min.js
-	@gzip -c build/client.min.js > build/client.min.js.gz
+	@mv $<.tmp $@
+
+build/%.min.js.gz: build/%.min.js
+	@gzip -c $< > $@
+
 
 dist: install build minify
