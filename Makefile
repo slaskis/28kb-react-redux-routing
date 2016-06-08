@@ -1,8 +1,5 @@
 .PHONY: install build minify dist
 
-install:
-	@npm install
-
 build: build/client.js
 	@:
 
@@ -25,5 +22,7 @@ build/%.min.js: build/%.js
 build/%.min.js.gz: build/%.min.js
 	@gzip -c $< > $@
 
+install:
+	@npm install
 
 dist: install build minify
